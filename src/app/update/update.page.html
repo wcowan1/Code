@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Update Award Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
+    <form [formGroup]="updateAwardForm" (ngSubmit)="updateForm()">
+      <ion-item>
+        <ion-label position="floating">Award Number</ion-label>
+        <ion-input formControlName="Award_Number" type="integer" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Award Name</ion-label>
+        <ion-input formControlName="Award_Name" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Award PI</ion-label>
+        <ion-input formControlName="Award_PI" type="text" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Award Sponsor</ion-label>
+        <ion-input formControlName="Award_Sponsor" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Department Number</ion-label>
+        <ion-input formControlName="Dept_Number" type="integer" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Start Date</ion-label>
+        <ion-input formControlName="Start_Date" type="date" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">End Date</ion-label>
+        <ion-input formControlName="End_Date" type="date" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Reporting Period</ion-label>
+        <ion-input formControlName="Reporting_Period" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Special Reporting Requirements</ion-label>
+        <ion-input formControlName="Special_Report" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Report Status</ion-label>
+        <ion-input formControlName="Report_Status" type="text" required></ion-input>
+      </ion-item> 
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Update</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+</ion-content>
