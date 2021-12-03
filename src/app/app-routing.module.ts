@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
   },
+  {
+    path: 'award-detail',
+    loadChildren: () => import('./award-detail/award-detail.module').then( m => m.AwardDetailPageModule)
+  },
 ];
 
 @NgModule({

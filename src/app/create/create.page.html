@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
-    <form [formGroup]="AwardForm" (ngSubmit)="onFormSubmit()">
+    <form [formGroup]="createAwardForm" (ngSubmit)="submitForm()">
       <ion-item>
         <ion-label position="floating">Award Number</ion-label>
         <ion-input formControlName="Award_Number" type="integer" required></ion-input>

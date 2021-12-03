@@ -1,0 +1,65 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Contacts" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="primary" *ngIf="award" [routerLink]="'/update/' + award.id">
+        Edit
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="award">
+  <ion-row>
+    <ion-col class="content-col">
+      <ion-text color="dark">
+        <h2 class="user-name">{{award.Award_Number}} {{award.Award_Name}}</h2>
+      </ion-text>
+
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Award Number</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Award_Number}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Award Name</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Award_Name}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Award PI</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Award_PI}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Award Sponsor</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Award_Sponsor}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Department Number</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Dept_Number}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Award Start Date</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Start_Date}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Award End Date</ion-label>
+          <ion-input color="primary" readonly="true">{{award.End_Date}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Reporting Period</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Reporting_Period}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Special Report</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Special_Report}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Report Status</ion-label>
+          <ion-input color="primary" readonly="true">{{award.Report_Status}}</ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

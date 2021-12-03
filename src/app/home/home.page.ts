@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AwardService } from './../shared/award.service';
+import { DataService } from '../database.service';
+import { Award } from './../shared/award';
+import { ModalController, IonRouterOutlet } from '@ionic/angular';
+import { CreatePage } from '../create/create.page';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,31 +11,24 @@ import { AwardService } from './../shared/award.service';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage implements OnInit {
-  Award: any = [];
+export class HomePage {
+  public awards: Observable<Award[]>;
 
   constructor(
-    private awardService: AwardService
+    private dataService: DataService,
+    public modalController: ModalController,
+    private routerOutlet: IonRouterOutlet
   ) {
+    this.awards = this.dataService.getAwards();
   }
 
-  ngOnInit() { }
+  async openNewAwardModal() {
+    const modal = await this.modalController.create({
+      component: CreatePage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl
+    });
 
-  ionViewDidEnter() {
-    this.awardService.getAwardList().subscribe((res) => {
-      console.log(res)
-      this.Award = res;
-    })
-  }
-
-  deleteAward(award, i) {
-    if (window.confirm('Do you want to delete award?')) {
-      this.awardService.deleteAward(award._id)
-        .subscribe(() => {
-          this.Award.splice(i, 1);
-          console.log('Award deleted!')
-        }
-        )
-    }
+    return await modal.present();
   }
 }

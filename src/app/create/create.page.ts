@@ -1,8 +1,9 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { AwardService } from './../shared/award.service';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { DataService } from '../database.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from "@angular/forms";
-
+import { FormGroup, FormBuilder, FormControl, Validators, FormGroupDirective } from "@angular/forms";
+import { ModalController } from '@ionic/angular';
+import { Award } from './../shared/award';
 
 @Component({
   selector: 'app-create',
@@ -11,42 +12,43 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 })
 
 export class CreatePage implements OnInit {
-  AwardForm: FormGroup;
+  createAwardForm: FormGroup;
+  @ViewChild('createForm') createForm: FormGroupDirective;
 
   constructor(
-    private awardAPI: AwardService,
-    private router: Router,
-    public fb: FormBuilder,
-    private zone: NgZone
-  ) {
-    this.AwardForm = this.fb.group({
-      Award_Number: [''],
-      Award_Name: [''],
-      Award_PI: [''],
-      Award_Sponsor: [''],
-      Dept_Number: [''],
-      Start_Date: [''],
-      End_Date: [''],
-      Reporting_Period: [''],
-      Special_Report: [''],
-      Report_Status: ['']   
-  })
+    private modalController: ModalController,
+    private dataService: DataService
+  ) { }
 
+
+  dismissModal() {
+    this.modalController.dismiss();
   }
-  ngOnInit() { }
+  ngOnInit(): void {
+    this.createAwardForm = new FormGroup({
+      'Award_Number': new FormControl('', Validators.required),
+      'Award_Name': new FormControl('', Validators.required),
+      'Award_PI': new FormControl(''),
+      'Award_Sponsor': new FormControl('', Validators.required),
+      'Dept_Number': new FormControl('', Validators.required),
+      'Start_Date': new FormControl('', Validators.required),
+      'End_Date': new FormControl('', Validators.required),
+      'Reporting_Period': new FormControl('', Validators.required),
+      'Special_Report': new FormControl('', Validators.required),
+      'Report_Status': new FormControl('', Validators.required),
 
-  onFormSubmit() {
-    if (!this.AwardForm.valid) {
-      return false;
-    } else {
-      this.awardAPI.addAward(this.AwardForm.value)
-        .subscribe((res) => {
-          this.zone.run(() => {
-            console.log(res)
-            this.AwardForm.reset();
-            this.router.navigate(['/home']);
-          })
-        });
-    }
+
+    });
+  }
+
+  submitForm() {
+    this.createForm.onSubmit(undefined);
+  }
+
+  createAward(values: any) {
+    // copy all the form values into the new award
+    let newAward: Award = { ...values };
+    this.dataService.createAward(newAward);
+    this.dismissModal();
   }
 }
